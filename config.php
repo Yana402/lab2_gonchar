@@ -2,4 +2,4 @@
 
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://';
 
-$base_url = $protocol . '/' . $_SERVER['HTTP_HOST'] . '/beauty_lab2';
+$base_url = $protocol . '/' . $_SERVER['HTTP_HOST'] . '/beauty';
