@@ -1,0 +1,32 @@
+RewriteEngine On
+
+# pages
+
+RewriteRule ^$ pages/main.php
+
+RewriteRule ^404$ pages/404.php
+RewriteRule ^main$ pages/main.php
+RewriteRule ^authorization$ pages/authorization.php
+RewriteRule ^registration$ pages/registration.php
+
+# requests
+
+RewriteRule ^api/authorization$ requests/authorization.php
+RewriteRule ^api/registration$ requests/registration.php
+RewriteRule ^api/leave$ requests/leave.php
+
+RewriteRule ^api/services$ requests/services.php
+RewriteRule ^api/services/add$ requests/services_add.php
+RewriteRule ^api/services/remove$ requests/services_remove.php
+
+RewriteRule ^api/masters$ requests/masters.php
+
+RewriteRule ^api/appointments$ requests/appointments.php
+RewriteRule ^api/appointments/add$ requests/appointments_add.php
+RewriteRule ^api/appointments/remove$ requests/appointments_remove.php
+RewriteRule ^api/appointments/submit$ requests/appointments_submit.php
+RewriteRule ^api/appointments/reject$ requests/appointments_reject.php
+
+# errors
+
+ErrorDocument 404 /404
