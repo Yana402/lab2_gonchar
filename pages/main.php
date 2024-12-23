@@ -30,10 +30,12 @@ if (!isset($_SESSION['appointments'])) {
         <header class="flex h-16 bg-white p-5 justify-between items-center border-b-[1px] border-b-amber-100">
             <a href="api/leave" class="text-pink-900 hover:text-amber-600">Выйти</a>
             <?php if (isset($_SESSION['user'])): ?>
-                <form method="get" action="api/services">
-                    <input name="name" type="search" class="w-[280px] mr-4 border-b-2 border-black outline-none box-border text-xl focus:border-b-2 focus:border-pink-800" placeholder="Введите услугу для поиска" maxlength="256" />
-                    <button class="rounded-xl w-fit h-fit p-2 bg-slate-100 hover:text-amber-500 hover:bg-slate-200" type="submit">Найти</button>
-                </form>
+                <?php if ($_SESSION['user']['role'] == 'c'): ?>
+                    <form method="get" action="api/appointments">
+                        <input name="name" type="search" class="w-[280px] mr-4 border-b-2 border-black outline-none box-border text-xl focus:border-b-2 focus:border-pink-800" placeholder="Введите имя мастера для поиска" maxlength="256" />
+                        <button class="rounded-xl w-fit h-fit p-2 bg-slate-100 hover:text-amber-500 hover:bg-slate-200" type="submit">Найти</button>
+                    </form>
+                <?php endif; ?>
             <?php endif; ?>
             <h2><?= ($_SESSION['user']['firstname'] ?? '') . ' ' . ($_SESSION['user']['lastname'] ?? '') ?></h2>
         </header>

@@ -1,8 +1,8 @@
 <?
 
-$hostname = '127.0.0.1';
+$hostname = '127.127.126.26';
 $username = 'root';
 $password = '';
-$database = 'beauty_lab2';
+$database = 'beauty';
 
 $connection = mysqli_connect($hostname, $username, $password, $database);
