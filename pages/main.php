@@ -7,7 +7,12 @@ require_once './_template.php';
 
 page_top("Главная");
 
-if (!isset($_SESSION['services'])) {
+if (!isset($_SESSION['user'])){
+    header('Location: authorization');
+    exit();
+}
+
+if (!isset($_SESSION['services']) && $_SESSION['user']['role'] != 'a') {
     header('Location: api/services');
     exit();
 }
@@ -17,7 +22,7 @@ if (!isset($_SESSION['masters'])) {
     exit();
 }
 
-if (!isset($_SESSION['appointments'])) {
+if (!isset($_SESSION['appointments']) && $_SESSION['user']['role'] != 'a') {
     header('Location: api/appointments');
     exit();
 }
@@ -50,6 +55,7 @@ if (!isset($_SESSION['appointments'])) {
                                 <h3 class="text-center text-pink-900"><?= $master['firstname'] . ' ' . $master['lastname'] ?></h3>
                                 <input name="date_time" type="datetime-local" required />
                                 <input name="master_id" value="<?= $master['id'] ?>" type="hidden" readonly />
+                                <p>Рейтинг: <?= $master['rate'] ?></p>
                                 <button type="submit" class="rounded-xl inset-0 m-auto p-3 bg-slate-100 hover:bg-slate-200 mt-5">Записаться</button>
                             </form>
                         <?php endforeach; ?>
@@ -112,6 +118,25 @@ if (!isset($_SESSION['appointments'])) {
                                             </form>
                                         </td>
                                     <?php endif; ?>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php elseif ($_SESSION['user']['role'] == 'a'): ?>
+                    <table class="w-3/4 inset-0 m-auto mt-10">
+                        <thead class="bg-slate-400">
+                            <tr>
+                                <th>Мастер</th>
+                                <th>Специализация</th>
+                                <th>Посещаемость (чел.)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-slate-100">
+                            <?php foreach ($_SESSION['masters'] as $master): ?>
+                                <tr>
+                                    <td class="text-center"><?= $master['firstname'] . ' ' . $master['lastname'] ?></td>
+                                    <td class="text-center"><?= $master['speciality'] ?></td>
+                                    <td class="text-center"><?= $master['total_appointments'] ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

@@ -25,7 +25,12 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-$stmt = $connection->prepare("SELECT * FROM masters INNER JOIN users ON users.id = masters.user_id");
+$stmt = $connection->prepare("SELECT id, speciality, firstname, lastname, stage, total_appointments, total_appointments / (SELECT COUNT(*) FROM appointments) AS rate 
+    FROM masters INNER JOIN (
+        SELECT master_id, COUNT(*) AS total_appointments FROM users 
+        INNER JOIN appointments ON appointments.master_id = users.id GROUP BY master_id
+    ) a ON a.master_id = masters.user_id 
+    INNER JOIN users ON users.id = masters.user_id ORDER BY total_appointments DESC;");
 
 if ($stmt) {
     if ($stmt->execute()) {
