@@ -15,6 +15,9 @@ RewriteRule ^api/authorization$ requests/authorization.php
 RewriteRule ^api/registration$ requests/registration.php
 RewriteRule ^api/leave$ requests/leave.php
 
+RewriteRule ^api/params$ requests/params.php
+RewriteRule ^api/params/update$ requests/params_update.php
+
 RewriteRule ^api/services$ requests/services.php
 RewriteRule ^api/services/add$ requests/services_add.php
 RewriteRule ^api/services/remove$ requests/services_remove.php

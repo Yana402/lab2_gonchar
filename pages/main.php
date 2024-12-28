@@ -17,6 +17,11 @@ if (!isset($_SESSION['services']) && $_SESSION['user']['role'] != 'a') {
     exit();
 }
 
+if (!isset($_SESSION['params']) && $_SESSION['user']['role'] == 'a') {
+    header('Location: api/params');
+    exit();
+}
+
 if (!isset($_SESSION['masters'])) {
     header('Location: api/masters');
     exit();
@@ -55,7 +60,9 @@ if (!isset($_SESSION['appointments']) && $_SESSION['user']['role'] != 'a') {
                                 <h3 class="text-center text-pink-900"><?= $master['firstname'] . ' ' . $master['lastname'] ?></h3>
                                 <input name="date_time" type="datetime-local" required />
                                 <input name="master_id" value="<?= $master['id'] ?>" type="hidden" readonly />
-                                <p>Рейтинг: <?= $master['rate'] ?></p>
+                                <p>Рейтинг: <?= number_format($master['total_rate'], 2) ?></p>
+                                <p>Стаж: <?= $master['stage'] . ' ' . ($master['stage'] < 5 ? 'год(а)' : 'лет') ?></p>
+                                <p>Услуга: <?= $master['name'] ?></p>
                                 <button type="submit" class="rounded-xl inset-0 m-auto p-3 bg-slate-100 hover:bg-slate-200 mt-5">Записаться</button>
                             </form>
                         <?php endforeach; ?>
@@ -141,6 +148,18 @@ if (!isset($_SESSION['appointments']) && $_SESSION['user']['role'] != 'a') {
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+
+                    <form method="POST" action="api/params/update" class="flex flex-col p-5 w-96 mx-auto mt-10 gap-6 bg-white">
+                        <h2 class="font-bold text-center">Настройка весов поиска</h2>
+                        <label for="service_price_coef">Цена услуги: <span id="service_price_coef"><?= $_SESSION['params'][0]['value'] ?></span></label>
+                        <input oninput="this.previousElementSibling.lastChild.innerText = this.value" name="service_price_coef" type='range' value="<?= $_SESSION['params'][0]['value'] ?>" min="-1" max="1" step="0.1" required/>
+                        <label for="master_stage_coef">Стаж мастера: <span id="master_stage_coef"><?= $_SESSION['params'][1]['value'] ?></span></label>
+                        <input oninput="this.previousElementSibling.lastChild.innerText = this.value" name="master_stage_coef" type='range' value="<?= $_SESSION['params'][1]['value'] ?>" min="-1" max="1" step="0.1" required/>
+                        <label for="master_rate_coef">Рейтинг мастера: <span id="master_rate_coef"><?= $_SESSION['params'][2]['value'] ?></span></label>
+                        <input oninput="this.previousElementSibling.lastChild.innerText = this.value" name="master_rate_coef" type='range' value="<?= $_SESSION['params'][2]['value'] ?>" min="-1" max="1" step="0.1" required/>
+                        <p class="text-red-500 text-center"><?= $_SESSION['error'] ?? '&nbsp;' ?></p>
+                        <button type="submit" class="mx-auto">Сохранить</button>
+                    </form>
                 <?php endif; ?>
             <?php else: ?>
                 <h1 class="text-pink-900 text-6xl text-center inset-0 mt-40">Вы не авторизованы</h1>

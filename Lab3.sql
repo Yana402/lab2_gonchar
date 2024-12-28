@@ -1,1 +1,0 @@
-INSERT INTO users (email, firstname, lastname, password) VALUES ('admin@example.com', 'Admin', '', md5('adminadmin'))
