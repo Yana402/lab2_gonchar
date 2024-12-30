@@ -33,7 +33,16 @@ if ($stmt) {
             exit();
         }
         $_SESSION['user'] = $result->fetch_assoc();
+        $_SESSION['cookie_key'] = substr(md5($_SESSION['user']['id'] . $_SESSION['user']['email']), 0, 32);
         $_SESSION['user']['avatar'] = $_SESSION['user']['avatar'] == '' ? null : $_SESSION['user']['avatar'];
+
+        $data = json_encode([
+            'firstname' => $_SESSION['user']['firstname'],
+            'lastname' => $_SESSION['user']['lastname'],
+        ]);
+        
+        $cipher = sodium_crypto_aead_aes256gcm_encrypt($data, 'user', '123456654321', $_SESSION['cookie_key']);
+        setcookie('user', $cipher, time() + 86400, '/');
 
         header('Location: ' . $base_url . '/main');
         exit();

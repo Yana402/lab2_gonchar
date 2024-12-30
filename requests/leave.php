@@ -11,4 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] != 'GET') {
 }
 
 unset($_SESSION['user']);
+setcookie('user', '', -1, '/');
+setcookie('search', '', -1, '/');
 header('Location: ' . $base_url . '/authorization');
