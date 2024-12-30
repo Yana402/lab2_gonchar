@@ -6,6 +6,7 @@ RewriteRule ^$ pages/main.php
 
 RewriteRule ^404$ pages/404.php
 RewriteRule ^main$ pages/main.php
+RewriteRule ^profile$ pages/profile.php
 RewriteRule ^authorization$ pages/authorization.php
 RewriteRule ^registration$ pages/registration.php
 
@@ -14,6 +15,9 @@ RewriteRule ^registration$ pages/registration.php
 RewriteRule ^api/authorization$ requests/authorization.php
 RewriteRule ^api/registration$ requests/registration.php
 RewriteRule ^api/leave$ requests/leave.php
+
+RewriteRule ^api/avatar/update$ requests/avatar_update.php
+RewriteRule ^api/photo/update$ requests/photo_update.php
 
 RewriteRule ^api/params$ requests/params.php
 RewriteRule ^api/params/update$ requests/params_update.php

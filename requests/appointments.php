@@ -5,8 +5,6 @@ session_start();
 require_once '../config.php';
 require_once '../utils/database.php';
 
-unset($_SESSION['error']);
-
 if ($_SERVER['REQUEST_METHOD'] != 'GET') {
     $_SESSION['error'] = '';
     header('Location: ' . $base_url . '/404');
