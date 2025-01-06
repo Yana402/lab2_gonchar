@@ -33,6 +33,7 @@ if ($stmt) {
             exit();
         }
         $_SESSION['user'] = $result->fetch_assoc();
+        $_SESSION['user']['avatar'] = $_SESSION['user']['avatar'] == '' ? null : $_SESSION['user']['avatar'];
 
         header('Location: ' . $base_url . '/main');
         exit();
