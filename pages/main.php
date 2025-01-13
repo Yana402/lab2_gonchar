@@ -40,6 +40,7 @@ if (isset($_COOKIE['user'])){
 ?>
 
 <script src="<?= $base_url ?>/static/scripts/date_validator.js"></script>
+<script src="<?= $base_url ?>/static/scripts/file_validator.js"></script>
 
 <div class="min-h-screen bg-[url(<?= $base_url ?>/static/images/bg.jpg)] bg-center bg-cover bg-no-repeat">
     <div class="fixed inset-0 bg-white opacity-60"></div>
@@ -108,7 +109,7 @@ if (isset($_COOKIE['user'])){
                                 }
                             ?>
                             <form method="post" class="flex flex-col rounded-xl p-5 w-fit h-fit bg-white" action="api/appointments/add" onsubmit="return validateDate(this)">
-                                <img class="w-[200px] h-[200px]" width="200" height="200" src="<?= $base_url ?>/static/images/<?= $file ?? 'profile.jpg' ?>" title="<?= $alt ?>">
+                                <img class="w-[200px] h-[200px]" width="200" height="200" alt="Фото по-умолчанию недоступно" src="<?= $base_url ?>/static/images/<?= $file ?? 'profile.jpg' ?>" title="<?= $alt ?>">
                                 <h3 class="text-center text-pink-900"><?= $master['firstname'] . ' ' . $master['lastname'] ?></h3>
                                 <input name="date_time" type="datetime-local" required />
                                 <input name="master_id" value="<?= $master['id'] ?>" type="hidden" readonly />
