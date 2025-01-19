@@ -26,6 +26,12 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] != $_SESSION['csrf_token']){
+    $_SESSION['error'] = "Отсутсвует csrf-токен или csrf-токен невалиден";
+    header('Location: ' . $base_url . '/profile');
+    exit();
+}
+
 if (!isset($_POST['password']) || !isset($_POST['password_confirm']) ){
     $_SESSION['error'] = "Отсутствуют данные формы";
     header('Location: ' . $base_url . '/profile');
