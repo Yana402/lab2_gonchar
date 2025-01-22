@@ -16,6 +16,8 @@ RewriteRule ^api/authorization$ requests/authorization.php
 RewriteRule ^api/registration$ requests/registration.php
 RewriteRule ^api/leave$ requests/leave.php
 
+RewriteRule ^api/password/change$ requests/password_change.php
+
 RewriteRule ^api/avatar/update$ requests/avatar_update.php
 RewriteRule ^api/photo/update$ requests/photo_update.php
 

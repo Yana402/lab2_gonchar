@@ -39,6 +39,16 @@ if (!isset($_SESSION['user'])){
                     <p class="text-red-500 text-center"><?= $_SESSION['error'] ?? '&nbsp;' ?></p>
                     <button type="submit" class="rounded-xl mx-auto hover:bg-slate-100 p-2">Загрузить</button>
                 </form>
+
+                <form class="flex flex-col inset-0 m-auto w-80 h-96 mt-20 bg-white border-[1px] border-amber-200" method="post" action="api/password/change">
+                    <h2 class="bg-amber-50 text-pink-900 font-bold text-2xl p-6">Смена пароля</h2>
+                    <div class="flex flex-col m-6 grow justify-between items-center">
+                        <input name="password" class="w-full border-b-2 border-black outline-none box-border text-xl focus:border-b-2 focus:border-pink-800" pattern="^[A-Za-z0-9\.!@#$%^&*]+$" title="Пароль может состоять из букв латинского алфавита, цифр, спецсимволов и иметь длину от 8 до 32 символов" type="password" maxlength="32" minlength="8" placeholder="Пароль" required />
+                        <input name="password_confirm" class="w-full border-b-2 border-black outline-none box-border text-xl focus:border-b-2 focus:border-pink-800" type="password" maxlength="32" minlength="8" placeholder="Повторите пароль" required />
+                        <button class="w-fit h-fit text-pink-800 bg-transparent text-xl hover:text-amber-600" type="submit">Сменить пароль</button>
+                        <p class="text-red-500 text-center"><?= $_SESSION['error'] ?? '&nbsp;' ?></p>
+                    </div>
+                </form>                
             <?php endif; ?>
         </main>
     </div>
