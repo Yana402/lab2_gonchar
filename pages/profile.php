@@ -14,7 +14,7 @@ if (!isset($_SESSION['user'])){
 
 ?>
 
-<script src="<?= $base_url ?>/static/scripts/file_validator.js"></script>
+<script src="<?= $base_url ?>/static/scripts/file_validator_min.js"></script>
 
 <div class="min-h-screen bg-[url(<?= $base_url ?>/static/images/bg.jpg)] bg-center bg-cover bg-no-repeat">
     <div class="fixed inset-0 bg-white opacity-60"></div>
