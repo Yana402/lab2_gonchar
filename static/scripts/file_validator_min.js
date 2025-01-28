@@ -1,0 +1,1 @@
+function validateFile(e,t){e.preventDefault();const n=new FormData(e.target).get(t);""!=n.name&&0==n.size?e.target.lastElementChild.previousElementSibling.innerText="Ошибка: файл отсутствует или недоступен":e.target.submit()}
