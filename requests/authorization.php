@@ -19,6 +19,12 @@ if ($connection->connect_error) {
     exit();
 }
 
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] != $_SESSION['csrf_token']){
+    $_SESSION['error'] = "Отсутсвует csrf-токен или csrf-токен невалиден";
+    header('Location: ' . $base_url . '/authorization');
+    exit();
+}
+
 $stmt = $connection->prepare("SELECT * FROM users WHERE password = md5(?) AND email = ?");
 
 if ($stmt) {
